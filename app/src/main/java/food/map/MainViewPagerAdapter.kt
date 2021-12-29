@@ -11,7 +11,7 @@ class MainViewPagerAdapter(fa: FragmentActivity): FragmentStateAdapter(fa) {
 
     override fun createFragment(position: Int): Fragment {
         return when(position){
-            0 -> { BlankFragment.newInstance() }
+            0 -> { PhoneBookFragment.newInstance() }
             1 -> { BlankFragment.newInstance() }
             else -> { BlankFragment.newInstance() }
         }
