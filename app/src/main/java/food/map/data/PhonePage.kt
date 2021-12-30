@@ -1,4 +1,4 @@
-package food.map
+package food.map.data
 
 data class PhonePage(
     var name: String = "",
