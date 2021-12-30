@@ -24,17 +24,24 @@ class RVAdapter(val context: Context?, val food_photoList: ArrayList<Photo>) :
     }
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        val dogPhoto = itemView?.findViewById<ImageView>(R.id.dogPhotoImg)
-        val dogName = itemView?.findViewById<TextView>(R.id.dogNameTv)
+        val dogPhoto1 = itemView?.findViewById<ImageView>(R.id.dogPhotoImg1)
+        val dogPhoto2 = itemView?.findViewById<ImageView>(R.id.dogPhotoImg2)
+        val dogPhoto3 = itemView?.findViewById<ImageView>(R.id.dogPhotoImg3)
+
 
         fun bind (dog: Photo, context: Context) {
             if (dog.food_photo != "") {
                 val resourceId = context.resources.getIdentifier("@drawable/${dog.food_photo}", "drawable", context.packageName)
-                dogPhoto?.setImageResource(resourceId)
+                dogPhoto1?.setImageResource(resourceId)
+                dogPhoto2?.setImageResource(resourceId)
+                dogPhoto3?.setImageResource(resourceId)
+
             } else {
-                dogPhoto?.setImageResource(R.mipmap.ic_launcher)
+                dogPhoto1?.setImageResource(R.mipmap.ic_launcher)
+                dogPhoto2?.setImageResource(R.mipmap.ic_launcher)
+                dogPhoto3?.setImageResource(R.mipmap.ic_launcher)
+
             }
-            dogName?.text = dog.name
         }
     }
 }
