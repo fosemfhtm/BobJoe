@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
             adapter = MainViewPagerAdapter(context as FragmentActivity)
         }
 
+        binding.viewpager.adapter
+
         TabLayoutMediator(binding.tabs, binding.viewpager) {tab, pos ->
             tab.text = "Title $pos"
             when (pos) {
