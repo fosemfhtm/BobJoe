@@ -20,14 +20,25 @@ import food.map.databinding.FragmentPhonebookBinding
 class PhoneBookFragment: Fragment() {
     private var _binding: FragmentPhonebookBinding? = null
     private val binding get() = _binding!!
-    private var data = arrayListOf<PhonePage>()
+    private var phoneData = arrayListOf<PhonePage>()
     private lateinit var adapter: PhoneBookAdapter
 
-    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+    private val addLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK){
             adapter.apply {
                 itemList = jsonController.readFromJson()
-                notifyItemInserted(0)
+                notifyDataSetChanged()
+                //notifyItemInserted(phoneData.size-1)
+            }
+        }
+    }
+
+    private val infoLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if (it.resultCode == Activity.RESULT_OK){
+            adapter.apply {
+                itemList = jsonController.readFromJson()
+                notifyDataSetChanged()
+                //notifyItemRemoved(clickedPos)
             }
         }
     }
@@ -48,7 +59,12 @@ class PhoneBookFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         jsonController = JsonController(requireContext())
-        data = jsonController.readFromJson()
+        phoneData = jsonController.readFromJson()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        phoneData = jsonController.readFromJson()
     }
 
 
@@ -59,11 +75,22 @@ class PhoneBookFragment: Fragment() {
     ): View? {
         _binding = FragmentPhonebookBinding.inflate(inflater, container, false)
 
-        adapter = PhoneBookAdapter(data, LayoutInflater.from(context))
+        adapter = PhoneBookAdapter(phoneData, LayoutInflater.from(context))
+        adapter.setOnItemClickListener(object : PhoneBookAdapter.OnItemClickListener{
+            override fun onItemClick(v: View, pos: Int) {
+                infoLauncher.launch(Intent(context, InfoActivity::class.java).apply {
+                    putExtra("pos", pos)
+                        .putExtra("name", phoneData[pos].name)
+                        .putExtra("phone", phoneData[pos].phone)
+                        .putExtra("loc", phoneData[pos].location)
+                })
+            }
+
+        })
         binding.rvPhonebook.adapter = adapter
         binding.rvPhonebook.layoutManager = LinearLayoutManager(context)
         binding.fab.setOnClickListener {
-            launcher.launch(Intent(context, AddPhoneActivity::class.java))
+            addLauncher.launch(Intent(context, AddPhoneActivity::class.java))
         }
 
         return binding.root
@@ -79,6 +106,14 @@ class PhoneBookFragment: Fragment() {
 class PhoneBookAdapter(var itemList: ArrayList<PhonePage>, private val inflater: LayoutInflater) :
     RecyclerView.Adapter<PhoneBookAdapter.ViewHolder>(){
 
+    interface OnItemClickListener{
+        fun onItemClick(v: View, pos: Int)
+    }
+    private lateinit var mListener: OnItemClickListener
+
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        this.mListener = listener
+    }
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val name: TextView = itemView.findViewById(R.id.tv_name)
         val img: ImageView = itemView.findViewById(R.id.iv_profile)
@@ -86,6 +121,10 @@ class PhoneBookAdapter(var itemList: ArrayList<PhonePage>, private val inflater:
         init {
             img.background = ShapeDrawable(OvalShape())
             img.clipToOutline = true
+
+            itemView.setOnClickListener {
+                mListener.onItemClick(itemView, bindingAdapterPosition)
+            }
         }
     }
 
@@ -100,6 +139,13 @@ class PhoneBookAdapter(var itemList: ArrayList<PhonePage>, private val inflater:
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = itemList[position].name
-        holder.img.setImageResource(R.drawable.ic_chicken)
+        when(itemList[position].type){
+            0 -> holder.img.setImageResource(R.drawable.ic_chicken)
+            1 -> holder.img.setImageResource(R.drawable.ic_korean)
+            2 -> holder.img.setImageResource(R.drawable.ic_japanese)
+            3 -> holder.img.setImageResource(R.drawable.ic_noodle)
+            4 -> holder.img.setImageResource(R.drawable.ic_pig)
+            5 -> holder.img.setImageResource(R.drawable.ic_pizza)
+        }
     }
 }
