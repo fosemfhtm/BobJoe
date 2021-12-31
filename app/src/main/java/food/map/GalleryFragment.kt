@@ -34,7 +34,8 @@ class GalleryFragment: Fragment() {
     ): View? {
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         var food_photoList = arrayListOf<Photo>(
-            Photo("교반", "gyoban")
+            Photo("gyoban", "daechi", "pizzabay"),
+
         )
 
         super.onCreate(savedInstanceState)
@@ -55,6 +56,5 @@ class GalleryFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.textview.text = "hello!"
     }
 }

@@ -30,11 +30,13 @@ class RVAdapter(val context: Context?, val food_photoList: ArrayList<Photo>) :
 
 
         fun bind (dog: Photo, context: Context) {
-            if (dog.food_photo != "") {
-                val resourceId = context.resources.getIdentifier("@drawable/${dog.food_photo}", "drawable", context.packageName)
-                dogPhoto1?.setImageResource(resourceId)
-                dogPhoto2?.setImageResource(resourceId)
-                dogPhoto3?.setImageResource(resourceId)
+            if (dog.name1 != "") {
+                val resourceId1 = context.resources.getIdentifier("@drawable/${dog.name1}", "drawable", context.packageName)
+                val resourceId2 = context.resources.getIdentifier("@drawable/${dog.name2}", "drawable", context.packageName)
+                val resourceId3 = context.resources.getIdentifier("@drawable/${dog.name3}", "drawable", context.packageName)
+                dogPhoto1?.setImageResource(resourceId1)
+                dogPhoto2?.setImageResource(resourceId2)
+                dogPhoto3?.setImageResource(resourceId3)
 
             } else {
                 dogPhoto1?.setImageResource(R.mipmap.ic_launcher)
