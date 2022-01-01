@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import food.map.databinding.FragmentGalleryBinding
-import kotlinx.android.synthetic.main.fragment_gallery.*
-
 
 class GalleryFragment: Fragment() {
     private var _binding: FragmentGalleryBinding? = null

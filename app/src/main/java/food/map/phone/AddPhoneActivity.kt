@@ -30,7 +30,7 @@ class AddPhoneActivity : Activity() {
 
         val display = (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
         window.attributes.width = (display.width * 0.8).toInt()
-        window.attributes.height = (display.height * 0.7).toInt()
+        window.attributes.height = (display.height * 0.6).toInt()
 
         val jsonController = JsonController(this)
         data = jsonController.readFromJson()
