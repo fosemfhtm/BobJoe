@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import food.map.R
@@ -28,7 +29,6 @@ class PhoneBookFragment: Fragment() {
             adapter.apply {
                 itemList = jsonController.readFromJson()
                 notifyDataSetChanged()
-                //notifyItemInserted(phoneData.size-1)
             }
         }
     }
@@ -38,7 +38,6 @@ class PhoneBookFragment: Fragment() {
             adapter.apply {
                 itemList = jsonController.readFromJson()
                 notifyDataSetChanged()
-                //notifyItemRemoved(clickedPos)
             }
         }
     }
@@ -89,6 +88,7 @@ class PhoneBookFragment: Fragment() {
         })
         binding.rvPhonebook.adapter = adapter
         binding.rvPhonebook.layoutManager = LinearLayoutManager(context)
+        binding.rvPhonebook.addItemDecoration(DividerItemDecoration(context, 1))
         binding.fab.setOnClickListener {
             addLauncher.launch(Intent(context, AddPhoneActivity::class.java))
         }
@@ -115,7 +115,7 @@ class PhoneBookAdapter(var itemList: ArrayList<PhonePage>, private val inflater:
         this.mListener = listener
     }
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val name: TextView = itemView.findViewById(R.id.tv_name)
+        val name: TextView = itemView.findViewById(R.id.tv_title)
         val img: ImageView = itemView.findViewById(R.id.iv_profile)
 
         init {

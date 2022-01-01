@@ -8,7 +8,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="65dp"
         android:gravity="center"
         android:text="맛집 추가"
         android:textSize="24sp"
@@ -57,7 +57,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginTop="4dp"
         android:layout_marginRight="4dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="32dp" />
 
     <Button
         android:id="@+id/btn_ok"
