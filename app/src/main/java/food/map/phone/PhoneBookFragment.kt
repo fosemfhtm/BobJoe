@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,10 @@ import androidx.recyclerview.widget.RecyclerView
 import food.map.R
 import food.map.data.PhonePage
 import food.map.databinding.FragmentPhonebookBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PhoneBookFragment: Fragment() {
     private var _binding: FragmentPhonebookBinding? = null
@@ -27,8 +32,19 @@ class PhoneBookFragment: Fragment() {
     private val addLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK){
             adapter.apply {
-                itemList = jsonController.readFromJson()
+                val list = jsonController.readFromJson()
+                itemList = list
                 notifyDataSetChanged()
+
+                val locList = list.map { page -> page.location }
+                Log.d("locList", locList.toString())
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    val mapDataList = withContext(Dispatchers.IO){
+                        locList.map { loc -> jsonController.addressToGeoCode(loc) }
+                    }
+                    Log.d("geoLoc", mapDataList[mapDataList.size-1].toString())
+                }
             }
         }
     }

@@ -4,8 +4,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
 import com.google.gson.GsonBuilder
 
-object ApiClient {
-    private const val BASE_URL = "https://openapi.naver.com/v1/"
+class ApiClient(private val url: String) {
     private var retrofit: Retrofit? = null
     val instance: Retrofit?
         get() {
@@ -14,7 +13,7 @@ object ApiClient {
                 .create()
             if (retrofit == null) {
                 retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build()
             }
