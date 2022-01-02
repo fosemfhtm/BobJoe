@@ -1,5 +1,6 @@
 package food.map.api
 
+import food.map.data.MapData
 import food.map.data.SearchRst
 import retrofit2.Call
 import retrofit2.http.GET
@@ -16,4 +17,11 @@ interface ApiInterface {
         @Path("type") type: String?,
         @Query("query") query: String?
     ): Call<SearchRst>
+
+    @GET("geocode")
+    fun getGeoLocation(
+        @Header("X-NCP-APIGW-API-KEY-ID") id: String?,
+        @Header("X-NCP-APIGW-API-KEY") pw: String?,
+        @Query("query") query: String?
+    ): Call<MapData>
 }

@@ -97,7 +97,7 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun getSearchRst(query: String) {
-        val apiInterface = ApiClient.instance?.create(ApiInterface::class.java)
+        val apiInterface = ApiClient("https://openapi.naver.com/v1/").instance?.create(ApiInterface::class.java)
         val call = apiInterface?.getSearchResult(CLIENT_ID, CLIENT_SECRET, "blog.json", query)
 
         call?.enqueue(object : Callback<SearchRst> {
