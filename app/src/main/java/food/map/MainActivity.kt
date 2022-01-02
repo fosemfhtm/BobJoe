@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
                     tab.setIcon(android.R.drawable.ic_menu_gallery)
                 }
                 2 -> {
-                    tab.text = "포털정보"
-                    tab.setIcon(android.R.drawable.ic_menu_search)
+                    tab.text = "맛집지도"
+                    tab.setIcon(android.R.drawable.ic_menu_mylocation)
                 }
             }
         }.attach()
