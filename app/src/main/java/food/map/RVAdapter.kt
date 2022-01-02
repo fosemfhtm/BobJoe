@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class RVAdapter(val context: Context?, val food_photoList: ArrayList<Photo>) :
     RecyclerView.Adapter<RVAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(R.layout.rv_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.rv_item_gallery, parent, false)
         return Holder(view)
     }
 

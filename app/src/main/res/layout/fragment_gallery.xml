@@ -6,14 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".BlankFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:id="@+id/button"
+        android:text="ADD PHOTO" />
+
+    <ImageView
+        android:id="@+id/iv_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mRecyclerView"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin" />
+
+    <ScrollView
+        android:id="@+id/hsv_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/container_selected_photos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:animateLayoutChanges="true"
+            android:gravity="start"
+            android:orientation="vertical"
+            android:visibility="visible" />
+    </ScrollView>
+
 
 </FrameLayout>

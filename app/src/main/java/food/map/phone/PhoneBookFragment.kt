@@ -139,6 +139,7 @@ class PhoneBookAdapter(var itemList: ArrayList<PhonePage>, private val inflater:
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = itemList[position].name
+
         when(itemList[position].type){
             0 -> holder.img.setImageResource(R.drawable.ic_chicken)
             1 -> holder.img.setImageResource(R.drawable.ic_korean)
