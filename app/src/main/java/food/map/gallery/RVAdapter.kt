@@ -1,4 +1,4 @@
-package food.map
+package food.map.gallery
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import food.map.Photo
+import food.map.R
 
 class RVAdapter(val context: Context?, val food_photoList: ArrayList<Photo>) :
     RecyclerView.Adapter<RVAdapter.Holder>() {
