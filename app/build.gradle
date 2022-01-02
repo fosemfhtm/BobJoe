@@ -72,4 +72,3 @@ dependencies {
     //NAVER MAP
     implementation 'com.naver.maps:map-sdk:3.13.0'
 }
-}

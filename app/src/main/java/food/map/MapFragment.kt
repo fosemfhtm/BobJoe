@@ -1,11 +1,23 @@
 package food.map
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import food.map.api.ApiClient
+import food.map.api.ApiInterface
+import food.map.data.MapData
 import food.map.databinding.FragmentMapBinding
+import food.map.phone.JsonController
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MapFragment: Fragment() {
     private var _binding: FragmentMapBinding? = null
@@ -31,11 +43,6 @@ class MapFragment: Fragment() {
     ): View? {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
 
-//        val fm = childFragmentManager
-//        val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
-//            ?: MapFragment.newInstance().also {
-//                fm.beginTransaction().add(R.id.map, it).commit()
-//            }
         return binding.root
     }
 
