@@ -1,5 +1,6 @@
 package food.map
 
+import android.content.Intent
 import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
@@ -9,10 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 import food.map.databinding.FragmentGalleryBinding
 import food.map.databinding.RvItemGalleryBinding
 import gun0912.tedimagepicker.builder.TedImagePicker
@@ -51,6 +55,32 @@ class GalleryFragment: Fragment() {
         showMultiImage(loadImage())
 
         binding.button.setOnClickListener {
+            TedPermission.create()
+                .setDeniedMessage("[설정]에서 카메라 권한을 허용해주세요!")
+                .setPermissions(android.Manifest.permission.CAMERA)
+                .setPermissionListener(object : PermissionListener {
+                    override fun onPermissionGranted() {
+                    }
+
+                    override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    }
+
+                })
+                .check()
+
+            TedPermission.create()
+                .setDeniedMessage("[설정]에서 저장소 권한을 허용해주세요!")
+                .setPermissions(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .setPermissionListener(object : PermissionListener {
+                    override fun onPermissionGranted() {
+                    }
+
+                    override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    }
+
+                })
+                .check()
+
             TedImagePicker.with(requireContext()).startMultiImage { uriList -> showMultiImage(uriList) }
         }
 
@@ -110,6 +140,7 @@ class GalleryFragment: Fragment() {
         val uriList = loadImage()
         uriList.removeAt(tag.toInt())
         saveImage(uriList)
+        Toast.makeText(context, "사진이 삭제되었습니다!", Toast.LENGTH_SHORT).show()
     }
 
 
