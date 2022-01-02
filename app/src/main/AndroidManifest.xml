@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Foodmap">
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="1zlm7yez4o" />
         <activity
             android:name=".phone.InfoActivity"
             android:exported="false"
