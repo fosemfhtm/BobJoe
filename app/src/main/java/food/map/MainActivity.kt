@@ -3,6 +3,8 @@ package food.map
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import food.map.databinding.ActivityMainBinding
 
@@ -16,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.viewpager.apply {
             adapter = MainViewPagerAdapter(context as FragmentActivity)
+            reduceDragSensitivity()
         }
 
         binding.viewpager.adapter
@@ -37,9 +40,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }.attach()
+    }
 
-        //viewPagerAdapter = MainViewPagerAdapter()
+    private fun ViewPager2.reduceDragSensitivity() {
+        val recyclerViewField = ViewPager2::class.java.getDeclaredField("mRecyclerView")
+        recyclerViewField.isAccessible = true
 
+        val recyclerView = recyclerViewField.get(this) as RecyclerView
+        val touchSlopField = RecyclerView::class.java.getDeclaredField("mTouchSlop")
+        touchSlopField.isAccessible = true
 
+        val touchSlop = touchSlopField.get(recyclerView) as Int
+        touchSlopField.set(recyclerView, touchSlop*5)
     }
 }

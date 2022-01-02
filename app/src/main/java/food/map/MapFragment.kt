@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import food.map.databinding.FragmentBlankBinding
+import food.map.databinding.FragmentMapBinding
 
-class BlankFragment: Fragment() {
-    private var _binding: FragmentBlankBinding? = null
+class MapFragment: Fragment() {
+    private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
 
     companion object{
-        fun newInstance(): BlankFragment {
+        fun newInstance(): MapFragment {
             val args = Bundle().apply {
                 //putString("test", "test")
             }
 
-            val fragment = BlankFragment()
+            val fragment = MapFragment()
             fragment.arguments = args
             return fragment
         }
@@ -29,7 +29,13 @@ class BlankFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentBlankBinding.inflate(inflater, container, false)
+        _binding = FragmentMapBinding.inflate(inflater, container, false)
+
+//        val fm = childFragmentManager
+//        val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
+//            ?: MapFragment.newInstance().also {
+//                fm.beginTransaction().add(R.id.map, it).commit()
+//            }
         return binding.root
     }
 
@@ -40,6 +46,5 @@ class BlankFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.textview.text = "hello!"
     }
 }
