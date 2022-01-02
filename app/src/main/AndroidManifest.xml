@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="food.map">
+
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -10,9 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Foodmap">
         <activity
+            android:name=".phone.InfoActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".phone.AddPhoneActivity"
             android:exported="false"
-            android:theme="@android:style/Theme.Material.Light.Dialog"/>
+            android:theme="@android:style/Theme.Material.Light.Dialog" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="food_type">
+        <item>치킨</item>
+        <item>한식</item>
+        <item>일식</item>
+        <item>중국집</item>
+        <item>족발/보쌈</item>
+        <item>피자/양식</item>
+    </string-array>
+</resources>
