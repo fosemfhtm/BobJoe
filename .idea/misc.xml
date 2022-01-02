@@ -6,20 +6,19 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/layout/Listview_item.xml" value="0.3253804799124449" />
         <entry key="app/src/main/res/layout/RV_item.xml" value="0.17850877192982456" />
+        <entry key="app/src/main/res/layout/activity_add_phone.xml" value="0.16710526315789473" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24866889883570453" />
         <entry key="app/src/main/res/layout/fragment_Gallery.xml" value="0.20835836651357625" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.18467648639797032" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.2492345376607471" />
+        <entry key="app/src/main/res/layout/fragment_phonebook.xml" value="0.18947368421052632" />
         <entry key="app/src/main/res/layout/recyclerview_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/recyclerview_item_border.xml" value="0.21535087719298246" />
         <entry key="app/src/main/res/layout/rv_item.xml" value="0.17850877192982456" />
+        <entry key="app/src/main/res/layout/rv_item_gallery.xml" value="0.17894736842105263" />
+        <entry key="app/src/main/res/layout/rv_item_phonebook.xml" value="0.18947368421052632" />
+        <entry key="app/src/main/res/layout/sd.xml" value="0.17894736842105263" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19210526315789472" />
-        <entry key="app/src/main/res/layout/activity_add_phone.xml" value="0.14260385005065856" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1381340579710145" />
-        <entry key="app/src/main/res/layout/add_popup.xml" value="0.19630192502532928" />
-        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.1381340579710145" />
-        <entry key="app/src/main/res/layout/fragment_phonebook.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/rv_item_phonebook.xml" value="0.297554347826087" />
       </map>
     </option>
   </component>
