@@ -71,4 +71,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     //NAVER MAP
     implementation 'com.naver.maps:map-sdk:3.13.0'
+    //GPS
+    implementation 'com.google.android.gms:play-services-location:19.0.0'
 }
