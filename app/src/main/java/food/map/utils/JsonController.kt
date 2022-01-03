@@ -1,8 +1,7 @@
-package food.map.phone
+package food.map.utils
 
 import android.content.Context
 import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.gson.Gson
 import food.map.api.ApiClient
 import food.map.api.ApiInterface
@@ -97,7 +96,7 @@ class JsonController(private val context: Context) {
         return dongSet
     }
 
-    private fun makeNewJson2(file: File) {
+    fun makeNewJson2(file: File) {
         val assetManager = context.resources.assets
         val inputStream = assetManager.open("pickerlocationlist.json")
         val jsonString = inputStream.bufferedReader().use { it.readText() }
@@ -132,5 +131,18 @@ class JsonController(private val context: Context) {
         val arrayList = arrayListOf<PickerLocation>()
         arrayList.addAll(list)
         return arrayList
+    }
+
+    fun constructJson(jsonString: String) {
+        val filePath = context.getExternalFilesDir(null)!!.path + "/pickerlocationlist.json"
+
+        val file = File(filePath)
+        file.delete()
+
+        val newFile = File(filePath)
+        val fileWriter = FileWriter(newFile, false)
+        val bufferedWriter = BufferedWriter(fileWriter)
+        bufferedWriter.append(jsonString)
+        bufferedWriter.close()
     }
 }

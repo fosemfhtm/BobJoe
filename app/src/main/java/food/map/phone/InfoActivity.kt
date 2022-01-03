@@ -15,12 +15,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
-import food.map.MainActivity
+import food.map.main.MainActivity
 import food.map.R
 import food.map.api.ApiClient
 import food.map.api.ApiInterface
 import food.map.data.SearchRst
 import food.map.databinding.ActivityInfoBinding
+import food.map.utils.JsonController
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import food.map.Photo
+import food.map.data.Photo
 import food.map.R
 
 class RVAdapter(val context: Context?, val food_photoList: ArrayList<Photo>) :

@@ -5,17 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
-import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.google.gson.Gson
-import food.map.MainActivity
+import food.map.main.MainActivity
 import food.map.R
 import food.map.data.PhonePage
 import food.map.databinding.ActivityAddPhoneBinding
+import food.map.utils.JsonController
 
 class AddPhoneActivity : Activity() {
     private lateinit var binding: ActivityAddPhoneBinding
@@ -54,7 +53,7 @@ class AddPhoneActivity : Activity() {
                     binding.spinnerType.selectedItemPosition
                 )
                 jsonController.updateToJson(Gson().toJson(data.apply { add(newData) }))
-                setResult(RESULT_OK, Intent(this,MainActivity::class.java))
+                setResult(RESULT_OK, Intent(this, MainActivity::class.java))
                 finish()
             }
             else{
