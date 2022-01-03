@@ -1,11 +1,14 @@
 package food.map.phone
 
 import android.content.Context
+import android.util.Log
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.google.gson.Gson
 import food.map.api.ApiClient
 import food.map.api.ApiInterface
 import food.map.data.MapData
 import food.map.data.PhonePage
+import food.map.data.PickerLocation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -78,5 +81,56 @@ class JsonController(private val context: Context) {
             }
         }.join()
         return mapData
+    }
+
+
+
+    fun makeDongSet():ArrayList<String> {
+        val pickerlocationlist = readFromJson2()
+        var dongSet = arrayListOf<String>()
+        pickerlocationlist.forEach {
+            if (!dongSet.contains(it.dong)){
+                dongSet.add(it.dong)
+                Log.d("dong", it.dong)
+            }
+        }
+        return dongSet
+    }
+
+    private fun makeNewJson2(file: File) {
+        val assetManager = context.resources.assets
+        val inputStream = assetManager.open("pickerlocationlist.json")
+        val jsonString = inputStream.bufferedReader().use { it.readText() }
+
+        val fileWriter = FileWriter(file, false)
+        val bufferedWriter = BufferedWriter(fileWriter)
+        bufferedWriter.append(jsonString)
+        bufferedWriter.close()
+    }
+
+    private fun getJsonString2(file: File): String {
+        var jsonString = ""
+        val fileReader = FileReader(file)
+        val bufferedReader = BufferedReader(fileReader)
+        for (readLine in bufferedReader.readLines()) {
+            jsonString += readLine
+        }
+        return jsonString
+    }
+
+    fun readFromJson2(): ArrayList<PickerLocation> {
+        val filePath = context.getExternalFilesDir(null)!!.path + "/pickerlocationlist.json"
+
+        val file = File(filePath)
+        if (!file.exists()) makeNewJson2(file) //Create new if there is no one
+        val jsonString = getJsonString2(file) //Read saved json file
+
+        //JsonArray -> List (Gson)
+        val list: List<PickerLocation> =
+            Gson().fromJson(jsonString, Array<PickerLocation>::class.java).toList()
+
+        val arrayList = arrayListOf<PickerLocation>()
+        arrayList.addAll(list)
+        return arrayList
     }
 }
