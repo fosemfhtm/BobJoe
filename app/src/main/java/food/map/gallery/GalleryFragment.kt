@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -78,8 +79,6 @@ class GalleryFragment: Fragment() {
             TedImagePicker.with(requireContext()).startMultiImage { uriList -> showMultiImage(uriList) }
         }
 
-
-
         super.onCreate(savedInstanceState)
         return binding.root
 
@@ -137,6 +136,23 @@ class GalleryFragment: Fragment() {
         Toast.makeText(context, "사진이 삭제되었습니다!", Toast.LENGTH_SHORT).show()
     }
 
+    fun showBiggerImage(tag: String){
+        val uriList = loadImage()
+        val uri = uriList.get(tag.toInt())
+        binding.ivImage.visibility = View.VISIBLE
+        binding.containerSelectedPhotos.visibility = View.GONE
+        binding.hsvImage.visibility = View.GONE
+        binding.button.visibility = View.GONE
+
+        Glide.with(this).load(uri).into(binding.ivImage)
+
+        binding.ivImage.setOnClickListener {
+            showMultiImage(loadImage())
+            Log.d("sdsd", "sdsd")
+        }
+
+    }
+
 
 
     private fun showMultiImage(uriList: List<Uri>) {
@@ -145,7 +161,9 @@ class GalleryFragment: Fragment() {
         val selectedUriList = saved_uriList.toList()
         Log.d("ted", "uriList: $uriList")
         binding.ivImage.visibility = View.GONE
+        binding.hsvImage.visibility  =View.VISIBLE
         binding.containerSelectedPhotos.visibility = View.VISIBLE
+        binding.button.visibility = View.VISIBLE
 
         binding.containerSelectedPhotos.removeAllViews()
 
@@ -201,6 +219,17 @@ class GalleryFragment: Fragment() {
                 true
             }
 
+            itemImageBinding.dogPhotoImg1.setOnClickListener {
+                showBiggerImage(it.tag.toString())
+            }
+            itemImageBinding.dogPhotoImg2.setOnClickListener {
+                showBiggerImage(it.tag.toString())
+            }
+            itemImageBinding.dogPhotoImg3.setOnClickListener {
+                showBiggerImage(it.tag.toString())
+
+            }
+
             binding.containerSelectedPhotos.addView(itemImageBinding.root)
         }
 
@@ -217,6 +246,10 @@ class GalleryFragment: Fragment() {
                 deleteImage(it.tag.toString())
                 showMultiImage(loadImage())
                 true
+            }
+
+            itemImageBinding.dogPhotoImg1.setOnClickListener {
+                showBiggerImage(it.tag.toString())
             }
 
             itemImageBinding.root.layoutParams = FrameLayout.LayoutParams(widthPixels, widthPixels/3)
@@ -247,6 +280,13 @@ class GalleryFragment: Fragment() {
                 deleteImage(it.tag.toString())
                 showMultiImage(loadImage())
                 true
+            }
+
+            itemImageBinding.dogPhotoImg1.setOnClickListener {
+                showBiggerImage(it.tag.toString())
+            }
+            itemImageBinding.dogPhotoImg2.setOnClickListener {
+                showBiggerImage(it.tag.toString())
             }
 
             itemImageBinding.root.layoutParams = FrameLayout.LayoutParams(widthPixels, widthPixels/3)
