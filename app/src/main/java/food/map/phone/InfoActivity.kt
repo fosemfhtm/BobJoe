@@ -22,6 +22,9 @@ import food.map.api.ApiInterface
 import food.map.data.SearchRst
 import food.map.databinding.ActivityInfoBinding
 import food.map.utils.JsonController
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -98,8 +101,10 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun getSearchRst(query: String) {
+        val dong = intent.getStringExtra("dong")!!
+
         val apiInterface = ApiClient("https://openapi.naver.com/v1/").instance?.create(ApiInterface::class.java)
-        val call = apiInterface?.getSearchResult(CLIENT_ID, CLIENT_SECRET, "blog.json", query)
+        val call = apiInterface?.getSearchResult(CLIENT_ID, CLIENT_SECRET, "blog.json", dong+query)
 
         call?.enqueue(object : Callback<SearchRst> {
             override fun onResponse(call: Call<SearchRst>, response: Response<SearchRst>) {

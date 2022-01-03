@@ -30,6 +30,7 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
     private lateinit var arrayAdapter: ArrayAdapter<String>
     private lateinit var markerList: ArrayList<Marker>
     private var loaded = false
+    private var selected = 0
 
     companion object{
         fun newInstance(): MapViewFragment {
@@ -67,6 +68,8 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
             android.R.layout.simple_spinner_item,
             dongSet
         )
+        arrayAdapter.setDropDownViewResource(R.layout.custom_spinner_list)
+
         spinner.adapter = arrayAdapter
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -75,21 +78,34 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
                     markerList.forEach {
                         it.map = null
                     }
+                    var latAvg = 0.0
+                    var lngAvg = 0.0
+                    var count = 0
+
                     val pickerLocationList = jsonController.readFromJson2()
                     pickerLocationList.forEach {
-                        if (it.dong == dongSet[p2])
+                        if (it.dong == dongSet[p2]){
                             naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
+                            latAvg += it.y
+                            lngAvg += it.x
+                            count++
+                        }
                     }
+                    latAvg /= count
+                    lngAvg /= count
+                    naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(latAvg, lngAvg)))
                 }
                 else
                     Toast.makeText(context, "정보를 불러오는 중입니다..", Toast.LENGTH_SHORT).show()
 
+                selected = p2
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
 
         }
+
 
         mapFragment.getMapAsync(this)
         return v
@@ -106,20 +122,31 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
             arrayAdapter.add(it)
         }
         arrayAdapter.notifyDataSetChanged()
+        mapFragment.getMapAsync(this)
     }
 
 
     override fun onMapReady(nm: NaverMap) {
         naverMap = nm
-        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(36.3986924, 127.4024869)))
 
-        if (!loaded){
-            val pickerLocationList = jsonController.readFromJson2()
-            pickerLocationList.forEach {
-                if (it.dong == dongSet[0])
-                    naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
+        val list = jsonController.readFromJson2()
+        var count = 0
+        var latAvg = 0.0
+        var lngAvg = 0.0
+        list.forEach {
+            if (it.dong == dongSet[selected]){
+                naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
+                latAvg += it.y
+                lngAvg += it.x
+                count++
             }
         }
+
+        latAvg /= count
+        lngAvg /= count
+
+        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(latAvg, lngAvg)))
+
         loaded = true
     }
 
