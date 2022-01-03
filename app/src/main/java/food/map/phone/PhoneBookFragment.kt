@@ -15,13 +15,20 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import food.map.R
+import food.map.data.MapData
 import food.map.data.PhonePage
+import food.map.data.PickerLocation
 import food.map.databinding.FragmentPhonebookBinding
+import food.map.MapFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
 
 class PhoneBookFragment: Fragment() {
     private var _binding: FragmentPhonebookBinding? = null
@@ -44,9 +51,50 @@ class PhoneBookFragment: Fragment() {
                         locList.map { loc -> jsonController.addressToGeoCode(loc) }
                     }
                     Log.d("geoLoc", mapDataList[mapDataList.size-1].toString())
+
+                    val picker_location_list = convertMapDataListToLocationSet(mapDataList, list)
+
+                    val jsonstring = Gson().toJson(picker_location_list)
+                    constructJson(jsonstring)
                 }
             }
+            val dongset = jsonController.makeDongSet()
         }
+    }
+
+
+    fun convertMapDataListToLocationSet(mapDataList: List<MapData?>, phonePageList: ArrayList<PhonePage>):ArrayList<PickerLocation>{
+        val picker_location_list = arrayListOf<PickerLocation>()
+        for (i in mapDataList.indices){
+            var picker_location = PickerLocation("", 0.0, 0.0, "" ,-1 )
+            if (mapDataList[i]!!.addresses == listOf<MapData.Address>()) {
+                picker_location = PickerLocation("", 0.0, 0.0, "" ,-1 )
+            }
+            else{
+                val dong = mapDataList[i]!!.addresses[0].addressElements[2].longName
+                val x = mapDataList[i]!!.addresses[0].x.toDouble()
+                val y = mapDataList[i]!!.addresses[0].y.toDouble()
+                val name = phonePageList[i].name
+                val type = phonePageList[i].type
+                picker_location = PickerLocation(name, x, y, dong ,type )
+            }
+            Log.d("picker_location", picker_location.dong)
+            picker_location_list.add(picker_location)
+        }
+        return picker_location_list
+    }
+
+    private fun constructJson(jsonString: String) {
+        val filePath = requireContext().getExternalFilesDir(null)!!.path + "/pickerlocationlist.json"
+
+        val file = File(filePath)
+        file.delete()
+
+        val newFile = File(filePath)
+        val fileWriter = FileWriter(newFile, false)
+        val bufferedWriter = BufferedWriter(fileWriter)
+        bufferedWriter.append(jsonString)
+        bufferedWriter.close()
     }
 
     private val infoLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -75,6 +123,23 @@ class PhoneBookFragment: Fragment() {
         super.onCreate(savedInstanceState)
         jsonController = JsonController(requireContext())
         phoneData = jsonController.readFromJson()
+
+
+        val locList = phoneData.map { page -> page.location }
+        Log.d("locList", locList.toString())
+
+        CoroutineScope(Dispatchers.Main).launch {
+            val mapDataList = withContext(Dispatchers.IO) {
+                locList.map { loc -> jsonController.addressToGeoCode(loc) }
+            }
+            Log.d("geoLoc", mapDataList[mapDataList.size - 1].toString())
+
+            val picker_location_list = convertMapDataListToLocationSet(mapDataList, phoneData)
+
+            val jsonstring = Gson().toJson(picker_location_list)
+            constructJson(jsonstring)
+        }
+
     }
 
     override fun onResume() {
