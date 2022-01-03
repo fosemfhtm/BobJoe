@@ -1,0 +1,95 @@
+[
+  {
+  "status": "OK",
+  "meta": {
+    "totalCount": 1,
+    "page": 1,
+    "count": 1
+  },
+  "addresses": [
+    {
+      "roadAddress": "대전광역시 유성구 전민로22번길 51",
+      "jibunAddress": "대전광역시 유성구 전민동 337-3",
+      "englishAddress": "51, Jeonmin-ro 22beon-gil, Yuseong-gu, Daejeon, Republic of Korea",
+      "addressElements": [
+        {
+          "types": [
+            "SIDO"
+          ],
+          "longName": "대전광역시",
+          "shortName": "대전광역시",
+          "code": ""
+        },
+        {
+          "types": [
+            "SIGUGUN"
+          ],
+          "longName": "유성구",
+          "shortName": "유성구",
+          "code": ""
+        },
+        {
+          "types": [
+            "DONGMYUN"
+          ],
+          "longName": "전민동",
+          "shortName": "전민동",
+          "code": ""
+        },
+        {
+          "types": [
+            "RI"
+          ],
+          "longName": "",
+          "shortName": "",
+          "code": ""
+        },
+        {
+          "types": [
+            "ROAD_NAME"
+          ],
+          "longName": "전민로22번길",
+          "shortName": "전민로22번길",
+          "code": ""
+        },
+        {
+          "types": [
+            "BUILDING_NUMBER"
+          ],
+          "longName": "51",
+          "shortName": "51",
+          "code": ""
+        },
+        {
+          "types": [
+            "BUILDING_NAME"
+          ],
+          "longName": "",
+          "shortName": "",
+          "code": ""
+        },
+        {
+          "types": [
+            "LAND_NUMBER"
+          ],
+          "longName": "337-3",
+          "shortName": "337-3",
+          "code": ""
+        },
+        {
+          "types": [
+            "POSTAL_CODE"
+          ],
+          "longName": "34052",
+          "shortName": "34052",
+          "code": ""
+        }
+      ],
+      "x": "127.4024869",
+      "y": "36.3986924",
+      "distance": 0.0
+    }
+  ],
+  "errorMessage": ""
+  }
+]

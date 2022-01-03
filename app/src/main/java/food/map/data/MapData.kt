@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class MapData(
     @SerializedName("addresses")
-    val addresses: List<Addresse>,
+    val addresses: List<Address>,
     @SerializedName("errorMessage")
     val errorMessage: String,
     @SerializedName("meta")
@@ -13,7 +13,7 @@ data class MapData(
     @SerializedName("status")
     val status: String
 ) {
-    data class Addresse(
+    data class Address(
         @SerializedName("addressElements")
         val addressElements: List<AddressElement>,
         @SerializedName("distance")

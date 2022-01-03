@@ -1,9 +1,9 @@
 package food.map.data
 
-class Location (
+class PickerLocation (
     var name: String = "",
     var x: Double = 0.0,
     var y: Double = 0.0,
-    var jibunAddress: String = "",
+    var dong: String = "",
     var type: Int = 0
 )
