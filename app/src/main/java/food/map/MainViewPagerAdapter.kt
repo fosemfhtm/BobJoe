@@ -15,7 +15,7 @@ class MainViewPagerAdapter(fa: FragmentActivity): FragmentStateAdapter(fa) {
         return when(position){
             0 -> { PhoneBookFragment.newInstance() }
             1 -> { GalleryFragment.newInstance() }
-            else -> { MapFragment.newInstance() }
+            else -> { MapViewFragment.newInstance() }
         }
     }
 }

@@ -21,7 +21,6 @@ import food.map.data.MapData
 import food.map.data.PhonePage
 import food.map.data.PickerLocation
 import food.map.databinding.FragmentPhonebookBinding
-import food.map.MapFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
