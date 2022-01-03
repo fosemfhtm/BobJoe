@@ -21,19 +21,18 @@ import food.map.data.MapData
 import food.map.data.PhonePage
 import food.map.data.PickerLocation
 import food.map.databinding.FragmentPhonebookBinding
+import food.map.utils.JsonController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.BufferedWriter
-import java.io.File
-import java.io.FileWriter
 
 class PhoneBookFragment: Fragment() {
     private var _binding: FragmentPhonebookBinding? = null
     private val binding get() = _binding!!
     private var phoneData = arrayListOf<PhonePage>()
     private lateinit var adapter: PhoneBookAdapter
+    private lateinit var pickerLocationList: ArrayList<PickerLocation>
 
     private val addLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK){
@@ -51,13 +50,12 @@ class PhoneBookFragment: Fragment() {
                     }
                     Log.d("geoLoc", mapDataList[mapDataList.size-1].toString())
 
-                    val picker_location_list = convertMapDataListToLocationSet(mapDataList, list)
+                    val pickerLocationList = convertMapDataListToLocationSet(mapDataList, list)
 
-                    val jsonstring = Gson().toJson(picker_location_list)
-                    constructJson(jsonstring)
+                    val jsonstring = Gson().toJson(pickerLocationList)
+                    jsonController.constructJson(jsonstring)
                 }
             }
-            val dongset = jsonController.makeDongSet()
         }
     }
 
@@ -83,23 +81,12 @@ class PhoneBookFragment: Fragment() {
         return picker_location_list
     }
 
-    private fun constructJson(jsonString: String) {
-        val filePath = requireContext().getExternalFilesDir(null)!!.path + "/pickerlocationlist.json"
-
-        val file = File(filePath)
-        file.delete()
-
-        val newFile = File(filePath)
-        val fileWriter = FileWriter(newFile, false)
-        val bufferedWriter = BufferedWriter(fileWriter)
-        bufferedWriter.append(jsonString)
-        bufferedWriter.close()
-    }
-
     private val infoLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK){
             adapter.apply {
                 itemList = jsonController.readFromJson()
+                val jsonstring = Gson().toJson(pickerLocationList)
+                jsonController.constructJson(jsonstring)
                 notifyDataSetChanged()
             }
         }
@@ -127,18 +114,22 @@ class PhoneBookFragment: Fragment() {
         val locList = phoneData.map { page -> page.location }
         Log.d("locList", locList.toString())
 
+        updateDongSet(locList)
+
+    }
+
+    private fun updateDongSet(locList: List<String>) {
         CoroutineScope(Dispatchers.Main).launch {
             val mapDataList = withContext(Dispatchers.IO) {
                 locList.map { loc -> jsonController.addressToGeoCode(loc) }
             }
             Log.d("geoLoc", mapDataList[mapDataList.size - 1].toString())
 
-            val picker_location_list = convertMapDataListToLocationSet(mapDataList, phoneData)
+            pickerLocationList = convertMapDataListToLocationSet(mapDataList, phoneData)
 
-            val jsonstring = Gson().toJson(picker_location_list)
-            constructJson(jsonstring)
+            val jsonstring = Gson().toJson(pickerLocationList)
+            jsonController.constructJson(jsonstring)
         }
-
     }
 
     override fun onResume() {

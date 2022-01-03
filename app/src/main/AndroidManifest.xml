@@ -23,13 +23,13 @@
         <activity
             android:name=".phone.InfoActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".main.MainActivity"/>
         <activity
             android:name=".phone.AddPhoneActivity"
             android:exported="false"
             android:theme="@android:style/Theme.Material.Light.Dialog" />
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
