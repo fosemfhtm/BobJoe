@@ -33,6 +33,7 @@ class PhoneBookFragment: Fragment() {
     private var phoneData = arrayListOf<PhonePage>()
     private lateinit var adapter: PhoneBookAdapter
     private lateinit var pickerLocationList: ArrayList<PickerLocation>
+    var loaded = false
 
     private val addLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK){
@@ -42,13 +43,11 @@ class PhoneBookFragment: Fragment() {
                 notifyDataSetChanged()
 
                 val locList = list.map { page -> page.location }
-                Log.d("locList", locList.toString())
 
                 CoroutineScope(Dispatchers.Main).launch {
                     val mapDataList = withContext(Dispatchers.IO){
                         locList.map { loc -> jsonController.addressToGeoCode(loc) }
                     }
-                    Log.d("geoLoc", mapDataList[mapDataList.size-1].toString())
 
                     val pickerLocationList = convertMapDataListToLocationSet(mapDataList, list)
 
@@ -75,7 +74,6 @@ class PhoneBookFragment: Fragment() {
                 val type = phonePageList[i].type
                 picker_location = PickerLocation(name, x, y, dong ,type )
             }
-            Log.d("picker_location", picker_location.dong)
             picker_location_list.add(picker_location)
         }
         return picker_location_list
@@ -112,7 +110,6 @@ class PhoneBookFragment: Fragment() {
 
 
         val locList = phoneData.map { page -> page.location }
-        Log.d("locList", locList.toString())
 
         updateDongSet(locList)
 
@@ -123,10 +120,9 @@ class PhoneBookFragment: Fragment() {
             val mapDataList = withContext(Dispatchers.IO) {
                 locList.map { loc -> jsonController.addressToGeoCode(loc) }
             }
-            Log.d("geoLoc", mapDataList[mapDataList.size - 1].toString())
 
             pickerLocationList = convertMapDataListToLocationSet(mapDataList, phoneData)
-
+            loaded = true
             val jsonstring = Gson().toJson(pickerLocationList)
             jsonController.constructJson(jsonstring)
         }
@@ -148,12 +144,17 @@ class PhoneBookFragment: Fragment() {
         adapter = PhoneBookAdapter(phoneData, LayoutInflater.from(context))
         adapter.setOnItemClickListener(object : PhoneBookAdapter.OnItemClickListener{
             override fun onItemClick(v: View, pos: Int) {
-                infoLauncher.launch(Intent(context, InfoActivity::class.java).apply {
-                    putExtra("pos", pos)
-                        .putExtra("name", phoneData[pos].name)
-                        .putExtra("phone", phoneData[pos].phone)
-                        .putExtra("loc", phoneData[pos].location)
-                })
+                if (loaded){
+                    infoLauncher.launch(Intent(context, InfoActivity::class.java).apply {
+                        putExtra("pos", pos)
+                            .putExtra("name", phoneData[pos].name)
+                            .putExtra("phone", phoneData[pos].phone)
+                            .putExtra("loc", phoneData[pos].location)
+                            .putExtra("dong", pickerLocationList[pos].dong)
+                    })
+                }
+                else
+                    Toast.makeText(context, "데이터를 불러오는 중입니다..", Toast.LENGTH_SHORT).show()
             }
 
         })
