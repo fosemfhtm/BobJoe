@@ -1,7 +1,6 @@
 package food.map.mapview
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,10 @@ import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.Overlay
+import com.naver.maps.map.util.MarkerIcons
 import food.map.R
 import food.map.utils.JsonController
 
@@ -76,7 +78,7 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
                     val pickerLocationList = jsonController.readFromJson2()
                     pickerLocationList.forEach {
                         if (it.dong == dongSet[p2])
-                            naverMap.putMarkers(LatLng(it.y, it.x))
+                            naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
                     }
                 }
                 else
@@ -115,16 +117,57 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
             val pickerLocationList = jsonController.readFromJson2()
             pickerLocationList.forEach {
                 if (it.dong == dongSet[0])
-                    naverMap.putMarkers(LatLng(it.y, it.x))
+                    naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
             }
         }
         loaded = true
     }
 
-    private fun NaverMap.putMarkers(latlng: LatLng) {
+    private fun NaverMap.putMarkers(latlng: LatLng, type: Int, name: String) {
         val marker = Marker()
+
+        val infoWindow = InfoWindow()
+        infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
+            override fun getText(infoWindow: InfoWindow): CharSequence {
+                return "정보 창 내용"
+            }
+        }
+
+        infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
+            override fun getText(infoWindow: InfoWindow): CharSequence {
+                // 정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
+                return infoWindow.marker?.tag as CharSequence? ?: ""
+            }
+        }
+
+        val listener = Overlay.OnClickListener { overlay ->
+            val _marker = overlay as Marker
+
+            if (_marker.infoWindow == null) {
+                // 현재 마커에 정보 창이 열려있지 않을 경우 엶
+                infoWindow.open(_marker)
+            } else {
+                // 이미 현재 마커에 정보 창이 열려있을 경우 닫음
+                infoWindow.close()
+            }
+
+            true
+        }
+
         marker.width = 50
         marker.height = 80
+        marker.icon = MarkerIcons.BLACK
+        when(type){
+            0 -> {marker.iconTintColor = Integer.parseInt("F7C100", 16)}
+            1 -> {marker.iconTintColor = Integer.parseInt("EC3843", 16)}
+            2 -> {marker.iconTintColor = Integer.parseInt("B2D135", 16)}
+            3 -> {marker.iconTintColor = Integer.parseInt("8C6D41", 16)}
+            4 -> {marker.iconTintColor = Integer.parseInt("D6689D", 16)}
+            5 -> {marker.iconTintColor = Integer.parseInt("00BAC9", 16)}
+        }
+        marker.tag = name
+        marker.onClickListener = listener
+
         marker.position = latlng
         marker.map = this
 
