@@ -10,6 +10,10 @@
 #### 김수민 [fosemfhtm](https://github.com/fosemfhtm)
 #### 박현준 [Dookong](https://github.com/Dookong)
 
+## Download
+
+#### [APK 다운로드](https://drive.google.com/file/d/1hEk27PxeTN9V_UcGyCV0YsHnrNhxevmo/view?usp=sharing)
+
 ## Features
 
 - 맛집 연락처 관리
