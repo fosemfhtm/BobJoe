@@ -12,6 +12,7 @@ import food.map.R
 import food.map.databinding.ActivityMainBinding
 import food.map.mapview.MapViewFragment
 import food.map.phone.PhoneBookFragment
+import food.map.utils.slideLeft
 
 class MainActivity : AppCompatActivity(), MapViewFragment.InfoClickListener {
     private lateinit var binding: ActivityMainBinding
@@ -78,6 +79,7 @@ class MainActivity : AppCompatActivity(), MapViewFragment.InfoClickListener {
     override fun onBackPressed() {
         binding.viewpager.isUserInputEnabled = true
         super.onBackPressed()
+        slideLeft()
     }
     override fun onInfoWindowClicked(name: String) {
         (mainPageAdapter.fragments[0] as PhoneBookFragment).binding.rvPhonebook

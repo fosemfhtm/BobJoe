@@ -1,11 +1,9 @@
 package food.map.phone
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
-import android.icu.text.IDNA
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,19 +16,17 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import com.gun0912.tedpermission.provider.TedPermissionProvider
 import food.map.R
 import food.map.data.MapData
 import food.map.data.PhonePage
 import food.map.data.PickerLocation
 import food.map.databinding.FragmentPhonebookBinding
 import food.map.utils.JsonController
+import food.map.utils.slideRight
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.gun0912.tedpermission.provider.TedPermissionProvider.context
-
 
 
 
