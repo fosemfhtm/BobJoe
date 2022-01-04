@@ -214,12 +214,12 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
         marker.height = 80
         marker.icon = MarkerIcons.BLACK
         when(type){
-            0 -> {marker.iconTintColor = Integer.parseInt("F7C100", 16)}
-            1 -> {marker.iconTintColor = Integer.parseInt("EC3843", 16)}
+            0 -> {marker.iconTintColor = Integer.parseInt("EC3843", 16)}
+            1 -> {marker.iconTintColor = Integer.parseInt("8C6D41", 16)}
             2 -> {marker.iconTintColor = Integer.parseInt("B2D135", 16)}
-            3 -> {marker.iconTintColor = Integer.parseInt("8C6D41", 16)}
-            4 -> {marker.iconTintColor = Integer.parseInt("D6689D", 16)}
-            5 -> {marker.iconTintColor = Integer.parseInt("00BAC9", 16)}
+            3 -> {marker.iconTintColor = Integer.parseInt("00BAC9", 16)}
+            4 -> {marker.iconTintColor = Integer.parseInt("F7C100", 16)}
+            5 -> {marker.iconTintColor = Integer.parseInt("D6689D", 16)}
         }
         marker.tag = name
         marker.onClickListener = listener

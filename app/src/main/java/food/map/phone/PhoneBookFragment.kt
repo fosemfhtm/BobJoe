@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
+import android.graphics.drawable.shapes.RectShape
+import android.icu.text.IDNA
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,7 +24,6 @@ import food.map.data.PhonePage
 import food.map.data.PickerLocation
 import food.map.databinding.FragmentPhonebookBinding
 import food.map.utils.JsonController
-import food.map.utils.slideRight
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -219,12 +220,12 @@ class PhoneBookAdapter(var itemList: ArrayList<PhonePage>, private val inflater:
         holder.name.text = itemList[position].name
 
         when(itemList[position].type){
-            0 -> holder.img.setImageResource(R.drawable.ic_chicken)
-            1 -> holder.img.setImageResource(R.drawable.ic_korean)
-            2 -> holder.img.setImageResource(R.drawable.ic_japanese)
-            3 -> holder.img.setImageResource(R.drawable.ic_noodle)
-            4 -> holder.img.setImageResource(R.drawable.ic_pig)
-            5 -> holder.img.setImageResource(R.drawable.ic_pizza)
+            0 -> holder.img.setImageResource(R.drawable.ic_bob)
+            1 -> holder.img.setImageResource(R.drawable.ic_dimsum)
+            2 -> holder.img.setImageResource(R.drawable.ic_sushi)
+            3 -> holder.img.setImageResource(R.drawable.ic_spagetti)
+            4 -> holder.img.setImageResource(R.drawable.ic_hamberger)
+            5 -> holder.img.setImageResource(R.drawable.ic_yasik)
         }
     }
 }
