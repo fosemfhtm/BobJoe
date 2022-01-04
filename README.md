@@ -1,17 +1,17 @@
-# foodmap
+# FoodMap
 
-카이스트 맛집 지도 <FOODMAP>
+#### 나만의 맛집 지도를 작성할 수 있는 서비스, FoodMap
 
-: 3개의 탭으로 구성된 안드로이드 앱
+## Period
+2021.12.28 ~ 2022.1.4
 
-Tap1
-카이스트 배달 맛집의 연락처
+## Contributors
 
-Tap2
-각 음식점의 대표메뉴 사진
+#### 김수민 [fosemfhtm](https://github.com/fosemfhtm)
+#### 박현준 [Dookong](https://github.com/Dookong)
 
-Tap3
-포털 검색 결과 긁어오기
+## Features
 
-
-
+- 맛집 연락처 관리
+- 맛집 사진 기록
+- 맛집 위치 지도뷰
