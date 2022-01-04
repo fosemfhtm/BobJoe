@@ -1,6 +1,9 @@
 package food.map.mapview
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,16 +13,16 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraUpdate
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.*
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.MarkerIcons
 import food.map.R
+import food.map.main.MainActivity
+import food.map.phone.InfoActivity
 import food.map.utils.JsonController
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MapViewFragment: Fragment(), OnMapReadyCallback {
     private lateinit var v: View
@@ -31,6 +34,7 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
     private lateinit var markerList: ArrayList<Marker>
     private var loaded = false
     private var selected = 0
+    var callback: InfoClickListener? = null
 
     companion object{
         fun newInstance(): MapViewFragment {
@@ -83,6 +87,12 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
                     var count = 0
 
                     val pickerLocationList = jsonController.readFromJson2()
+                    if (p2 == 0) {
+                        pickerLocationList.forEach{
+                            naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
+                        }
+                    }
+
                     pickerLocationList.forEach {
                         if (it.dong == dongSet[p2]){
                             naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
@@ -106,7 +116,6 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
 
         }
 
-
         mapFragment.getMapAsync(this)
         return v
     }
@@ -125,16 +134,29 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is InfoClickListener) {
+            callback = context as InfoClickListener
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback = null
+    }
+
 
     override fun onMapReady(nm: NaverMap) {
         naverMap = nm
+
 
         val list = jsonController.readFromJson2()
         var count = 0
         var latAvg = 0.0
         var lngAvg = 0.0
         list.forEach {
-            if (it.dong == dongSet[selected]){
+            if (selected == 0){
                 naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
                 latAvg += it.y
                 lngAvg += it.x
@@ -145,7 +167,7 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
         latAvg /= count
         lngAvg /= count
 
-        naverMap.moveCamera(CameraUpdate.scrollTo(LatLng(latAvg, lngAvg)))
+        naverMap.cameraPosition = CameraPosition(LatLng(latAvg, lngAvg), 11.0)
 
         loaded = true
     }
@@ -173,6 +195,13 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
             if (_marker.infoWindow == null) {
                 // 현재 마커에 정보 창이 열려있지 않을 경우 엶
                 infoWindow.open(_marker)
+                infoWindow.setOnClickListener {
+                    val a = activity as MainActivity
+                    a.viewpager.currentItem = 0
+
+                    callback?.onInfoWindowClicked(name)
+                    true
+                }
             } else {
                 // 이미 현재 마커에 정보 창이 열려있을 경우 닫음
                 infoWindow.close()
@@ -199,5 +228,9 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
         marker.map = this
 
         markerList.add(marker)
+    }
+
+    public interface InfoClickListener{
+        abstract fun onInfoWindowClicked(name: String)
     }
 }

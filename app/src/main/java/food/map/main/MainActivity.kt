@@ -2,23 +2,30 @@ package food.map.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import food.map.R
 import food.map.databinding.ActivityMainBinding
+import food.map.mapview.MapViewFragment
+import food.map.phone.PhoneBookFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MapViewFragment.InfoClickListener {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var mainPageAdapter: MainViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mainPageAdapter = MainViewPagerAdapter(this as FragmentActivity)
+
         binding.viewpager.apply {
-            adapter = MainViewPagerAdapter(context as FragmentActivity)
+            adapter = mainPageAdapter
             reduceDragSensitivity()
         }
 
@@ -71,5 +78,16 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         binding.viewpager.isUserInputEnabled = true
         super.onBackPressed()
+    }
+    override fun onInfoWindowClicked(name: String) {
+        (mainPageAdapter.fragments[0] as PhoneBookFragment).binding.rvPhonebook
+            .apply {
+                for (i in  0 until this.adapter!!.itemCount){
+                    if(this.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<TextView>(
+                            R.id.tv_title)?.text.toString() == name){
+                        this.findViewHolderForAdapterPosition(i)?.itemView?.performClick()
+                    }
+                }
+            }
     }
 }

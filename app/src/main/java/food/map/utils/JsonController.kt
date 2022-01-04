@@ -86,11 +86,10 @@ class JsonController(private val context: Context) {
 
     fun makeDongSet():ArrayList<String> {
         val pickerlocationlist = readFromJson2()
-        var dongSet = arrayListOf<String>()
+        var dongSet = arrayListOf<String>("전체보기")
         pickerlocationlist.forEach {
             if (!dongSet.contains(it.dong)){
                 dongSet.add(it.dong)
-                Log.d("dong", it.dong)
             }
         }
         return dongSet

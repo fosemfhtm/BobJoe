@@ -10,13 +10,13 @@ import food.map.phone.PhoneBookFragment
 const val PAGE_NUMBER = 3
 
 class MainViewPagerAdapter(fa: FragmentActivity): FragmentStateAdapter(fa) {
+    var fragments : ArrayList<Fragment> = arrayListOf(
+        PhoneBookFragment.newInstance(),
+        GalleryFragment.newInstance(),
+        MapViewFragment.newInstance()
+    )
+
     override fun getItemCount() = PAGE_NUMBER
 
-    override fun createFragment(position: Int): Fragment {
-        return when(position){
-            0 -> { PhoneBookFragment.newInstance() }
-            1 -> { GalleryFragment.newInstance() }
-            else -> { MapViewFragment.newInstance() }
-        }
-    }
+    override fun createFragment(position: Int) = fragments[position]
 }
