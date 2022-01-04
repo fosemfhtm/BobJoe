@@ -10,8 +10,7 @@
 #### 김수민 [fosemfhtm](https://github.com/fosemfhtm)
 #### 박현준 [Dookong](https://github.com/Dookong)
 
-<img src="![Screenshot_20220104-200329](https://user-images.githubusercontent.com/96766097/148050366-dc45074e-f735-4310-b299-7c92bbb726ac.jpg)
-" width="200" height="400"/>
+<img src="https://user-images.githubusercontent.com/96766097/148050366-dc45074e-f735-4310-b299-7c92bbb726ac.jpg" width="200" height="400"/>
 ![Screenshot_20220104-200315](https://user-images.githubusercontent.com/96766097/148050453-a01d77af-ffbd-4800-8aed-48575e42944e.jpg)
 ![Screenshot_20220104-200343](https://user-images.githubusercontent.com/96766097/148050495-0f4903b3-e23f-40b0-95d3-7023bf5ac326.jpg)
 ![Screenshot_20220104-200352](https://user-images.githubusercontent.com/96766097/148050519-a76de679-247d-4243-99e8-0eb1676848f3.jpg)
