@@ -10,15 +10,20 @@
 #### 김수민 [fosemfhtm](https://github.com/fosemfhtm)
 #### 박현준 [Dookong](https://github.com/Dookong)
 
+## Download
+#### [APK 다운로드](https://drive.google.com/file/d/1hEk27PxeTN9V_UcGyCV0YsHnrNhxevmo/view?usp=sharing)
+
 ## Features
 
 - 맛집 연락처 관리
 - 맛집 사진 기록
 - 맛집 위치 지도뷰
 
+### Splash
 <img src="https://user-images.githubusercontent.com/96766097/148050366-dc45074e-f735-4310-b299-7c92bbb726ac.jpg" width="220" height="400"/>
 
-## TAB1
+
+### TAB1
 <img src="https://user-images.githubusercontent.com/96766097/148050453-a01d77af-ffbd-4800-8aed-48575e42944e.jpg" width="220" height="400"/>
 
 
@@ -46,8 +51,7 @@
 인터넷의 블로그 리뷰, 연락처 및 통화 버튼, 주소 및 지도 어플 바로가기로 구성되어 있습니다.
 
 
-
-
+### TAB2
 <img src="https://user-images.githubusercontent.com/96766097/148050519-a76de679-247d-4243-99e8-0eb1676848f3.jpg" width="220" height="400"/>
 
 음식 사진들을 따로 관리할 수 있는 갤러리가 있는 탭입니다.
@@ -57,6 +61,7 @@
 사진을 한번 누르면 선택한 사진을 크게 볼 수 있고, 다시 한 번 누르면 원래대로 돌아옵니다.
 
 
+### TAB3
 <img src="https://user-images.githubusercontent.com/96766097/148050534-b01f844e-e009-4b7c-ac10-81e47bc3ba4a.jpg" width="220" height="400"/>
 
 탭1 전화번호부에서 미리 추가해둔 데이터를 실제 지도상에서 시각화하여 마커를 띄웁니다.
