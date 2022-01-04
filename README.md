@@ -20,6 +20,8 @@
 
 ## TAB1
 <img src="https://user-images.githubusercontent.com/96766097/148050453-a01d77af-ffbd-4800-8aed-48575e42944e.jpg" width="220" height="400"/>
+
+
 자신만의 맛집 연락처 리스트를 저장할 수 있는 탭입니다.
 
 
@@ -28,22 +30,20 @@
 
 
 
-
-
 <img src="https://user-images.githubusercontent.com/96766097/148053658-bd352fe6-24dd-45ab-a533-b5f4c112bde7.jpg" width="220" height="400"/>
+
+
 추가 버튼을 눌러 새로운 맛집을 등록할 수 있으며, 이름, 연락처, 주소를 입력하면 됩니다.
 
 
 
 
-
-
 <img src="https://user-images.githubusercontent.com/96766097/148050495-0f4903b3-e23f-40b0-95d3-7023bf5ac326.jpg" width="220" height="400"/>
+
+
 맛집을 누르면 저장해둔 정보를 이용해 정보창을 볼 수 있습니다.
 
 인터넷의 블로그 리뷰, 연락처 및 통화 버튼, 주소 및 지도 어플 바로가기로 구성되어 있습니다.
-
-
 
 
 
