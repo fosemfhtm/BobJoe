@@ -140,8 +140,10 @@ class SearchAdapter(val context: Context, var itemList: ArrayList<SearchRst.Item
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.title.text = itemList[position].title.replace("(?s)<[^>]*>(\\s*<[^>]*>)*".toRegex(), " ")
-        holder.desc.text = itemList[position].description.replace("(?s)<[^>]*>(\\s*<[^>]*>)*".toRegex(), " ")
+        holder.title.text = itemList[position].title.replace("(?s)<[^>]*>(\\s*<[^>]*>)*".toRegex(), "")
+            .replace("&lt;", "").replace("&gt;", "")
+        holder.desc.text = itemList[position].description.replace("(?s)<[^>]*>(\\s*<[^>]*>)*".toRegex(), "")
+            .replace("&lt;", "").replace("&gt;", "")
 
         val date = itemList[position].postdate
         holder.date.text = "${date.slice(IntRange(0,3))}-${date.slice(IntRange(4,5))}-${date.slice(

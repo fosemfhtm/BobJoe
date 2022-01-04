@@ -12,13 +12,10 @@
         android:id="@+id/tv_info_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:paddingLeft="16dp"
         android:textColor="#000000"
         android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.009"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="제목" />
@@ -27,10 +24,10 @@
         android:id="@+id/tv_info_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_info_title"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingLeft="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_info_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_info_title"
         tools:text="소개..." />
 

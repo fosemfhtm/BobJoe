@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#E34B1C</color>
+    <color name="colorPrimaryDark">#CA380A</color>
+    <color name="colorAccent">#F83B00</color>
+    <color name="darkMint">#00a575</color>
+    <color name="backgroundColor">#f7f8f9</color>
+    <color name="plus">#1ec695</color>
+    <color name="minus">#464c53</color>
+    <color name="greenish">#00f6ae</color>
+    <color name="silver">#c9cdd2</color>
+    <color name="charcoal_grey">#464c53</color>
+    <color name="pale_grey">#f7f8f9</color>
+    <color name="green_blue">#1ec695</color>
+    <color name="cool_grey">#9fa4aa</color>
+    <color name="black_two">#2f2f2f</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
