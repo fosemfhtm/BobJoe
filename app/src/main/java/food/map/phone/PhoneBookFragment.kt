@@ -198,7 +198,6 @@ class PhoneBookAdapter(var itemList: ArrayList<PhonePage>, private val inflater:
         val img: ImageView = itemView.findViewById(R.id.iv_profile)
 
         init {
-            img.background = ShapeDrawable(OvalShape())
             img.clipToOutline = true
 
             itemView.setOnClickListener {

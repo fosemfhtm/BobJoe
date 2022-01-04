@@ -3,6 +3,7 @@ package food.map.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -12,6 +13,7 @@ import food.map.R
 import food.map.databinding.ActivityMainBinding
 import food.map.mapview.MapViewFragment
 import food.map.phone.PhoneBookFragment
+import food.map.utils.NetworkManager
 import food.map.utils.slideLeft
 
 class MainActivity : AppCompatActivity(), MapViewFragment.InfoClickListener {
@@ -23,44 +25,53 @@ class MainActivity : AppCompatActivity(), MapViewFragment.InfoClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mainPageAdapter = MainViewPagerAdapter(this as FragmentActivity)
+        val netManger = NetworkManager(this)
+        if (!netManger.checkNetworkState()) {
+            AlertDialog.Builder(this).setTitle("네트워크 에러")
+                .setMessage("인터넷 연결을 확인해주세요!")
+                .create().show()
+        }
+        else{
+            mainPageAdapter = MainViewPagerAdapter(this as FragmentActivity)
 
-        binding.viewpager.apply {
-            adapter = mainPageAdapter
-            reduceDragSensitivity()
+            binding.viewpager.apply {
+                adapter = mainPageAdapter
+                reduceDragSensitivity()
+            }
+
+            binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    val pos = tab?.position
+                    binding.viewpager.isUserInputEnabled = pos != 2
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                }
+
+            })
+
+            TabLayoutMediator(binding.tabs, binding.viewpager) {tab, pos ->
+                tab.text = "Title $pos"
+                when (pos) {
+                    0 -> {
+                        tab.text = "전화번호부"
+                        tab.setIcon(android.R.drawable.ic_menu_call)
+                    }
+                    1 -> {
+                        tab.text = "갤러리"
+                        tab.setIcon(android.R.drawable.ic_menu_gallery)
+                    }
+                    2 -> {
+                        tab.text = "맛집지도"
+                        tab.setIcon(android.R.drawable.ic_menu_mylocation)
+                    }
+                }
+            }.attach()
         }
 
-        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                val pos = tab?.position
-                binding.viewpager.isUserInputEnabled = pos != 2
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-
-        })
-
-        TabLayoutMediator(binding.tabs, binding.viewpager) {tab, pos ->
-            tab.text = "Title $pos"
-            when (pos) {
-                0 -> {
-                    tab.text = "전화번호부"
-                    tab.setIcon(android.R.drawable.ic_menu_call)
-                }
-                1 -> {
-                    tab.text = "갤러리"
-                    tab.setIcon(android.R.drawable.ic_menu_gallery)
-                }
-                2 -> {
-                    tab.text = "맛집지도"
-                    tab.setIcon(android.R.drawable.ic_menu_mylocation)
-                }
-            }
-        }.attach()
     }
 
 
