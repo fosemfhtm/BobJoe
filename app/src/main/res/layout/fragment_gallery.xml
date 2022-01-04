@@ -13,6 +13,7 @@
         android:id="@+id/button"
         android:src="@android:drawable/ic_input_add"
         android:layout_margin="16dp"
+        app:backgroundTint="@color/colorLight"
         />
 
     <ImageView

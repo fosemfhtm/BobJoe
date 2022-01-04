@@ -3,6 +3,8 @@
     <color name="colorPrimary">#F34813</color>
     <color name="colorPrimaryDark">#CA380A</color>
     <color name="colorAccent">#F83B00</color>
+    <color name="colorLight">#F47934</color>
+    <color name="colorLLight">#F5D2C7</color>
     <color name="darkMint">#00a575</color>
     <color name="backgroundColor">#f7f8f9</color>
     <color name="plus">#1ec695</color>

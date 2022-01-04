@@ -32,9 +32,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/white"
-            app:tabIndicatorColor="#004C98"
-            app:tabRippleColor="#004C98"
-            app:tabSelectedTextColor="#004C98"
+            app:tabIconTint="@color/colorPrimary"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabRippleColor="@color/colorPrimary"
+            app:tabSelectedTextColor="@color/colorLight"
             app:tabTextColor="@color/black" />
     </com.google.android.material.appbar.AppBarLayout>
 

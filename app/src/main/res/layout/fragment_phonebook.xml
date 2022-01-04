@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
+        app:backgroundTint="@color/colorLight"
         android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="@+id/rv_phonebook"
         app:layout_constraintEnd_toEndOf="@+id/rv_phonebook" />
