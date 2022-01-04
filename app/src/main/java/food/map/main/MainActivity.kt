@@ -1,9 +1,12 @@
 package food.map.main
 
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -43,6 +46,12 @@ class MainActivity : AppCompatActivity(), MapViewFragment.InfoClickListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     val pos = tab?.position
                     binding.viewpager.isUserInputEnabled = pos != 2
+
+//                    when (pos){
+//                        0 -> tab.icon?.setTint(resources.getColor(R.color.greenish))
+//                        1 -> tab.icon?.setTint(resources.getColor(R.color.greenish))
+//                        2 -> tab.icon?.setTint(resources.getColor(R.color.greenish))
+//                    }
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -58,15 +67,15 @@ class MainActivity : AppCompatActivity(), MapViewFragment.InfoClickListener {
                 when (pos) {
                     0 -> {
                         tab.text = "전화번호부"
-                        tab.setIcon(android.R.drawable.ic_menu_call)
+                        tab.setIcon(R.drawable.ic_phone)
                     }
                     1 -> {
                         tab.text = "갤러리"
-                        tab.setIcon(android.R.drawable.ic_menu_gallery)
+                        tab.setIcon(R.drawable.ic_gallery2)
                     }
                     2 -> {
                         tab.text = "맛집지도"
-                        tab.setIcon(android.R.drawable.ic_menu_mylocation)
+                        tab.setIcon(R.drawable.ic_mapview)
                     }
                 }
             }.attach()

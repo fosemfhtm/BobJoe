@@ -23,6 +23,7 @@ import food.map.main.MainActivity
 import food.map.phone.InfoActivity
 import food.map.utils.JsonController
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_map.*
 
 class MapViewFragment: Fragment(), OnMapReadyCallback {
     private lateinit var v: View
@@ -164,8 +165,9 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
                 count++
             }
             else {
-                if (it.dong == dongSet[selected])
-                naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
+                if (it.dong == dongSet[selected]){
+                    naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
+                }
             }
         }
 
