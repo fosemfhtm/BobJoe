@@ -157,10 +157,15 @@ class MapViewFragment: Fragment(), OnMapReadyCallback {
         var lngAvg = 0.0
         list.forEach {
             if (selected == 0){
+                Log.d("dsd","sdsd")
                 naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
                 latAvg += it.y
                 lngAvg += it.x
                 count++
+            }
+            else {
+                if (it.dong == dongSet[selected])
+                naverMap.putMarkers(LatLng(it.y, it.x), it.type, it.name)
             }
         }
 
