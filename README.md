@@ -10,18 +10,26 @@
 #### 김수민 [fosemfhtm](https://github.com/fosemfhtm)
 #### 박현준 [Dookong](https://github.com/Dookong)
 
-<img src="https://user-images.githubusercontent.com/96766097/148050366-dc45074e-f735-4310-b299-7c92bbb726ac.jpg" width="220" height="400"/>
-<img src="https://user-images.githubusercontent.com/96766097/148050453-a01d77af-ffbd-4800-8aed-48575e42944e.jpg" width="220" height="400"/>
-<img src="https://user-images.githubusercontent.com/96766097/148050495-0f4903b3-e23f-40b0-95d3-7023bf5ac326.jpg" width="220" height="400"/>
-<img src="https://user-images.githubusercontent.com/96766097/148050519-a76de679-247d-4243-99e8-0eb1676848f3.jpg" width="220" height="400"/>
-<img src="https://user-images.githubusercontent.com/96766097/148050534-b01f844e-e009-4b7c-ac10-81e47bc3ba4a.jpg" width="220" height="400"/>
-
-
 ## Features
 
 - 맛집 연락처 관리
 - 맛집 사진 기록
 - 맛집 위치 지도뷰
+
+<img src="https://user-images.githubusercontent.com/96766097/148050366-dc45074e-f735-4310-b299-7c92bbb726ac.jpg" width="220" height="400"/>
+
+## TAB1
+<img src="https://user-images.githubusercontent.com/96766097/148050453-a01d77af-ffbd-4800-8aed-48575e42944e.jpg" width="220" height="400"/>
+자신만의 맛집 연락처 리스트를 저장할 수 있는 탭입니다.
+아이콘에 따라 한식/중식/일식/양식/패스트푸드/야식 으로 구분됩니다.
+추가 버튼을 눌러
+
+<img src="https://user-images.githubusercontent.com/96766097/148050495-0f4903b3-e23f-40b0-95d3-7023bf5ac326.jpg" width="220" height="400"/>
+<img src="https://user-images.githubusercontent.com/96766097/148050519-a76de679-247d-4243-99e8-0eb1676848f3.jpg" width="220" height="400"/>
+<img src="https://user-images.githubusercontent.com/96766097/148050534-b01f844e-e009-4b7c-ac10-81e47bc3ba4a.jpg" width="220" height="400"/>
+<img src="https://user-images.githubusercontent.com/96766097/148053658-bd352fe6-24dd-45ab-a533-b5f4c112bde7.jpg" width="220" height="400"/>
+
+
 
 ## Libraries
 
